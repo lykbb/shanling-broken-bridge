@@ -1,0 +1,132 @@
+/* =========================================================
+ * 世界地图模块样式（舞台内 1920×1080，所有定位用百分比）
+ * ========================================================= */
+#worldmap { position: absolute; inset: 0; z-index: 650; opacity: 0; pointer-events: none; transition: opacity .35s ease; --gold: #f0cf86; --gold2: #ffe7b0; --ink: rgba(18,14,12,.86); }
+#worldmap.show { opacity: 1; pointer-events: auto; }
+#worldmap.closing { transition: none; }
+#worldmap .wm-frame { position: absolute; inset: 0; transform: scale(1.035); transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+#worldmap.show .wm-frame { transform: scale(1); }
+#worldmap button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.wm-bg { position: absolute; inset: 0; background: #0c0a0e center / 100% 100% no-repeat; }
+.wm-bg.missing { display: flex; align-items: center; justify-content: center; background: linear-gradient(#232030, #0b0a10); }
+
+/* ---------- 地点区域 ---------- */
+.wm-areas, .wm-pins, .wm-menu { position: absolute; inset: 0; pointer-events: none; }
+.wm-area { position: absolute; pointer-events: auto; border-radius: 50%; transition: box-shadow .2s ease, background .2s ease, filter .2s ease; }
+.wm-area.hover, .wm-area:focus-visible { background: radial-gradient(ellipse at center, rgba(255,220,140,.16), rgba(255,220,140,.05) 55%, transparent 70%); box-shadow: 0 0 0 2px rgba(255,226,160,.55), 0 0 40px 6px rgba(255,205,110,.35); outline: none; }
+.wm-area.sel { background: radial-gradient(ellipse at center, rgba(255,226,150,.14), transparent 70%); box-shadow: 0 0 0 2px rgba(255,226,160,.8), 0 0 60px 10px rgba(255,205,110,.35); }
+.wm-area.st-locked { cursor: not-allowed; -webkit-backdrop-filter: grayscale(.9) brightness(.45); backdrop-filter: grayscale(.9) brightness(.45); -webkit-mask: radial-gradient(ellipse at center, #000 45%, transparent 72%); mask: radial-gradient(ellipse at center, #000 45%, transparent 72%); }
+.wm-area.st-locked.hover, .wm-area.st-locked.sel { box-shadow: none; background: rgba(0,0,0,.1); }
+
+/* ---------- 地点名牌（盖住原图的名牌） ---------- */
+.wm-pin { position: absolute; pointer-events: auto; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; align-items: center; column-gap: 12px; padding: 0 18px 0 6px; border-radius: 40px;
+  background: linear-gradient(180deg, rgba(34,27,22,.93), rgba(16,12,10,.95)); border: 2px solid rgba(240,207,134,.6); box-shadow: 0 6px 18px rgba(0,0,0,.55); color: var(--gold2);
+  transition: transform .25s ease, box-shadow .2s ease, filter .25s ease; transform-origin: 30% 50%; }
+.wm-num { grid-row: 1 / span 2; width: 54px; height: 54px; border-radius: 50%; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 30px; font-family: Georgia, serif; color: var(--gold2); background: radial-gradient(circle, #3a2c1e, #15100c); }
+.wm-pname { font-size: 31px; letter-spacing: 3px; line-height: 1.05; align-self: end; white-space: nowrap; }
+.wm-pin small { font-size: 17px; color: rgba(255,231,176,.7); letter-spacing: 1px; white-space: nowrap; align-self: start; }
+.wm-mark { position: absolute; right: -14px; top: -14px; min-width: 34px; height: 34px; border-radius: 17px; font-style: normal; font-size: 19px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+.wm-mark:empty { display: none; }
+.wm-pin.hover, .wm-pin:focus-visible { box-shadow: 0 0 0 2px rgba(255,231,176,.8), 0 0 28px 4px rgba(255,205,110,.55); outline: none; }
+.wm-pin.sel { border-color: var(--gold2); box-shadow: 0 0 0 3px rgba(255,231,176,.9), 0 0 36px 8px rgba(255,205,110,.5); transform: scale(1.07); filter: brightness(1.12); }
+.wm-pin.pop { animation: wmPop .35s ease; }
+@keyframes wmPop { 0% { transform: scale(1); } 45% { transform: scale(1.13); } 100% { transform: scale(1.07); } }
+.wm-pin.st-locked { filter: grayscale(1) brightness(.6); cursor: not-allowed; }
+.wm-pin.st-locked .wm-pname::after { content: ''; }
+.wm-pin.st-locked .wm-mark { background: #2a2622; border: 2px solid #777; color: #ccc; font-size: 16px; }
+.wm-pin.st-exploring .wm-mark { background: #e25a2e; color: #fff; border: 2px solid #ffd2a0; animation: wmPulse 1.6s ease-in-out infinite; }
+.wm-pin.st-done .wm-mark { background: linear-gradient(#ffe7a6, #c99735); color: #3a2508; border: 2px solid #fff2c8; }
+.wm-pin.here::before { content: '当前位置'; position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -8px); padding: 2px 12px; border-radius: 12px; font-size: 16px; background: rgba(240,207,134,.92); color: #2c1c08; white-space: nowrap; }
+@keyframes wmPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,120,60,.6); } 50% { box-shadow: 0 0 0 10px rgba(255,120,60,0); } }
+
+/* ---------- 左侧菜单（透明点击层） ---------- */
+.wm-menu-item { position: absolute; pointer-events: auto; border-radius: 10px; transition: background .2s, box-shadow .2s; }
+.wm-menu-item:hover { background: rgba(255,220,150,.1); box-shadow: inset 0 0 0 1px rgba(255,220,150,.45); }
+.wm-menu-item.active { cursor: default; }
+.wm-menu-item.active:hover { background: none; box-shadow: none; }
+
+/* ---------- 右上角计数牌 ---------- */
+.wm-counters { position: absolute; display: flex; gap: 2.5%; }
+.wm-count { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 30px; background: rgba(20,16,14,.9); border: 2px solid rgba(240,207,134,.55); color: var(--gold2); font-size: 21px; }
+.wm-count i { font-style: normal; color: var(--gold); }
+.wm-count b { font-weight: normal; color: #fff; }
+
+/* ---------- 右侧详情面板 ---------- */
+.wm-panel { position: absolute; display: flex; flex-direction: column; padding: 16px 18px 18px; box-sizing: border-box; border-radius: 16px; background: linear-gradient(180deg, rgba(26,21,18,.95), rgba(12,10,9,.96)); border: 2px solid rgba(240,207,134,.6); box-shadow: inset 0 0 0 6px rgba(0,0,0,.35), 0 10px 40px rgba(0,0,0,.6); color: #efe4cf; transition: opacity .125s ease, transform .125s ease; overflow: hidden; }
+.wm-panel.fading { opacity: 0; transform: translateX(10px); }
+.wm-preview { position: relative; height: 31%; flex: none; border-radius: 10px; overflow: hidden; border: 1px solid rgba(240,207,134,.45); background: #000; }
+.wm-big { position: absolute; inset: 0; transition: opacity .125s; }
+.wm-big.fading { opacity: 0; }
+.wm-big img, .wm-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wm-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 56px; font-size: 40px !important; line-height: 1; color: #fff !important; background: rgba(0,0,0,.35) !important; border-radius: 8px !important; transition: background .2s; }
+.wm-arrow:hover { background: rgba(0,0,0,.6) !important; }
+.wm-arrow.l { left: 6px; } .wm-arrow.r { right: 6px; }
+.wm-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 14px 8px; font-size: 18px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.7)); pointer-events: none; }
+.wm-head { display: flex; align-items: baseline; justify-content: space-between; margin-top: 12px; border-bottom: 1px solid rgba(240,207,134,.35); padding-bottom: 6px; }
+.wm-head h3 { margin: 0; font-size: 42px; font-weight: normal; letter-spacing: 6px; color: var(--gold2); }
+.wm-no { font-size: 30px; font-family: Georgia, serif; color: var(--gold); }
+.wm-chap { font-size: 18px; color: rgba(240,207,134,.8); margin-top: 6px; }
+.wm-intro { font-size: 19px; line-height: 1.6; margin: 8px 0 4px; color: #e6dccb; }
+.wm-sec { font-size: 19px; color: var(--gold); margin: 8px 0 6px; } .wm-sec i { font-style: normal; margin-right: 6px; }
+.wm-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.wm-thumb { aspect-ratio: 16 / 10; border-radius: 6px !important; overflow: hidden; border: 2px solid transparent !important; opacity: .75; transition: opacity .2s, border-color .2s, transform .2s; }
+.wm-thumb:hover { opacity: 1; transform: translateY(-2px); }
+.wm-thumb.sel { opacity: 1; border-color: var(--gold) !important; }
+.wm-people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.wm-person { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 16px !important; color: #efe4cf; transition: transform .2s; }
+.wm-person:hover { transform: translateY(-2px); }
+.wm-face { width: 100%; aspect-ratio: 1; border-radius: 10px; border: 2px solid rgba(240,207,134,.6); background: #2a2420 center top / cover no-repeat; transition: box-shadow .2s; }
+.wm-person:hover .wm-face { box-shadow: 0 0 16px rgba(255,210,120,.6); }
+.wm-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; }
+.wm-status { font-size: 19px; display: flex; align-items: center; gap: 8px; color: #e6dccb; }
+.wm-status i { font-style: normal; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; background: #3b3128; color: var(--gold2); }
+.wm-status.st-exploring i { background: #e25a2e; color: #fff; }
+.wm-status.st-done i { background: linear-gradient(#ffe7a6, #c99735); color: #3a2508; }
+.wm-enter { padding: 12px 30px !important; font-size: 22px !important; letter-spacing: 4px; border-radius: 30px !important; color: #2c1c08 !important; background: linear-gradient(#ffe7a6, #d8a84a) !important; box-shadow: 0 0 0 2px rgba(255,240,200,.6), 0 4px 16px rgba(0,0,0,.5); transition: filter .2s, transform .2s; }
+.wm-enter:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+.wm-enter:disabled { background: #4a423a !important; color: #9a9080 !important; cursor: not-allowed; box-shadow: none; }
+.wm-panel.locked .wm-preview, .wm-panel.locked .wm-thumbs, .wm-panel.locked .wm-people { filter: grayscale(1) brightness(.5); }
+
+/* 占位图 */
+.wm-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; background: repeating-linear-gradient(45deg, #2a2420 0 12px, #231e1a 12px 24px); color: #bba; font-size: 14px; text-align: center; padding: 4px; box-sizing: border-box; }
+.wm-ph code { font-size: 11px; color: #998; word-break: break-all; }
+.wm-ph.big { width: 60%; height: 40%; font-size: 30px; } .wm-ph.big code { font-size: 20px; }
+
+/* ---------- 人物简介浮层 ---------- */
+.wm-card { position: absolute; right: 22.6%; top: 42%; width: 640px; display: flex; gap: 20px; padding: 20px; border-radius: 16px; background: rgba(18,14,12,.96); border: 2px solid rgba(240,207,134,.7); box-shadow: 0 16px 50px rgba(0,0,0,.7); color: #efe4cf; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .25s, transform .25s; }
+.wm-card.show { opacity: 1; transform: none; pointer-events: auto; }
+.wm-card-face { flex: none; width: 190px; height: 190px; border-radius: 12px; border: 2px solid rgba(240,207,134,.6); background: #2a2420 center top / cover no-repeat; }
+.wm-card-text h4 { margin: 4px 0 4px; font-size: 32px; font-weight: normal; letter-spacing: 4px; }
+.wm-role { font-size: 18px; color: rgba(240,207,134,.85); margin-bottom: 10px; }
+.wm-card-text p { margin: 0; font-size: 20px; line-height: 1.6; }
+.wm-card-x { position: absolute; right: 12px; top: 8px; font-size: 24px !important; color: #ccb !important; }
+
+/* ---------- 底部章节栏 ---------- */
+.wm-chapters { position: absolute; display: flex; align-items: center; background: linear-gradient(180deg, rgba(22,18,15,.94), rgba(10,8,7,.97)); border-top: 2px solid rgba(240,207,134,.55); }
+.wm-ch-title { width: 13%; text-align: center; font-size: 24px; letter-spacing: 4px; color: var(--gold2); }
+.wm-ch-row { flex: 1; display: flex; justify-content: space-around; position: relative; }
+.wm-ch-row::before { content: ''; position: absolute; left: 8%; right: 8%; top: 20px; height: 2px; background: linear-gradient(90deg, transparent, rgba(240,207,134,.45), transparent); }
+.wm-ch { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 140px; color: #efe4cf; transition: filter .2s, transform .2s; }
+.wm-ch i { font-style: normal; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; background: #1b1612; border: 2px solid rgba(240,207,134,.6); color: var(--gold2); margin-bottom: 4px; }
+.wm-ch b { font-weight: normal; font-size: 22px; letter-spacing: 2px; }
+.wm-ch small { font-size: 16px; color: rgba(239,228,207,.65); }
+.wm-ch:hover { transform: translateY(-2px); }
+.wm-ch.st-locked { filter: grayscale(1) brightness(.6); }
+.wm-ch.st-exploring i { background: radial-gradient(circle, #ffe7a6, #c99735); color: #3a2508; box-shadow: 0 0 18px rgba(255,210,120,.7); }
+.wm-ch.st-done i { background: #3a2c1a; color: #ffe7a6; }
+.wm-ch.sel b { color: var(--gold2); text-shadow: 0 0 12px rgba(255,210,120,.6); }
+
+/* ---------- 关闭按钮 ---------- */
+.wm-close { position: absolute; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 24px !important; letter-spacing: 3px; border-radius: 34px !important; color: var(--gold2) !important; background: rgba(18,14,12,.88) !important; border: 2px solid rgba(240,207,134,.6) !important; transition: box-shadow .2s, background .2s; }
+.wm-close:hover { box-shadow: 0 0 22px rgba(255,210,120,.5); background: rgba(40,30,22,.92) !important; }
+.wm-close b { font-weight: normal; }
+
+/* 2026-11-07 修重影：地图底图上已画好编号、地名和副标题，这里不再叠文字，只保留透明点击框、悬停/选中光圈和状态角标 */
+.wm-pin { background: transparent; border-color: transparent; box-shadow: none; }
+.wm-pin .wm-num, .wm-pin .wm-pname, .wm-pin small { visibility: hidden; }
+.wm-pin.st-locked { filter: none; }
+
+/* 2026-11-07 修「点哪都没反应」：地图关闭后，里面写了 pointer-events:auto 的地点/菜单按钮仍会透明地挡住场景热点。关闭时整层禁用点击并隐藏。 */
+#worldmap:not(.show), #worldmap:not(.show) * { pointer-events: none !important; }
+#worldmap:not(.show) { visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; }
+#worldmap.show { visibility: visible; transition: opacity .35s ease; }

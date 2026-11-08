@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>山灵</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worldmap.css">
+  <link rel="stylesheet" href="css/boss.css">
+  <link rel="stylesheet" href="css/extras.css">
+</head>
+<body>
+  <div id="loading"><div class="loading-inner"><div id="loading-text">加载中…</div><div class="loading-track"><div id="loading-bar"></div></div></div></div>
+
+  <div id="viewport">
+    <div id="stage">
+      <!-- 场景层 -->
+      <div id="bg-a" class="bg"></div>
+      <div id="bg-b" class="bg"></div>
+      <div id="props"></div>
+      <div id="chars"></div>
+      <div id="fx"></div>
+      <div id="hotspots"></div>
+      <div id="cg" class="cg"><img alt=""></div>
+      <div id="minigame"></div>
+
+      <!-- HUD -->
+      <div id="scene-name"></div>
+      <div id="objective"></div>
+      <div id="hud">
+        <button id="btn-bag" title="背包 (I)">背包</button>
+        <button id="btn-map" title="地图 (M)">地图</button>
+        <button id="btn-log" title="对话记录">记录</button>
+        <button id="btn-save" title="存档">存档</button>
+        <button id="btn-settings" title="设置">设置</button>
+        <button id="btn-menu" title="标题">标题</button>
+      </div>
+
+      <!-- 对话 -->
+      <div id="choices"></div>
+      <div id="dialogue">
+        <div id="dlg-portrait"></div>
+        <div id="dlg-name"></div>
+        <div id="dlg-text"></div>
+        <div id="dlg-next">▼</div>
+      </div>
+
+      <!-- 演出 -->
+      <div id="flash"></div>
+      <div id="fade"></div>
+
+      <!-- 标题 -->
+      <div id="title">
+        <div class="title-inner">
+          <h1 id="title-name"></h1>
+          <p id="title-sub"></p>
+          <div class="title-btns">
+            <button id="btn-new">开始游戏</button>
+            <button id="btn-continue">继续</button>
+          </div>
+          <p id="title-endings"></p>
+        </div>
+      </div>
+
+      <!-- 结局 -->
+      <div id="ending">
+        <div class="ending-inner">
+          <h2 id="ending-title"></h2>
+          <div id="ending-text"></div>
+          <div class="title-btns">
+            <button id="btn-restart">再来一次</button>
+            <button id="btn-totitle">回到标题</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 弹窗 -->
+      <div id="modal">
+        <div class="modal-panel">
+          <div class="modal-head"><h3 id="modal-title"></h3><button onclick="Game.ui.close()">✕</button></div>
+          <div id="modal-body"></div>
+        </div>
+      </div>
+      <div id="toasts"></div>
+    </div>
+  </div>
+
+  <!-- ① 数据层：素材、角色、场景、剧情（替换内容只改这里） -->
+  <script src="data/assets.js"></script>
+  <script src="data/characters.js"></script>
+  <script src="data/scenes.js"></script>
+  <script src="data/story.js"></script>
+  <script src="data/worldmap.js"></script>
+  <script src="data/boss.js"></script>
+
+  <!-- ② 引擎层：通用逻辑，不包含任何剧情内容 -->
+  <script src="js/engine/core.js"></script>
+  <script src="js/engine/assets.js"></script>
+  <script src="js/engine/audio.js"></script>
+  <script src="js/engine/stage.js"></script>
+  <script src="js/engine/dialogue.js"></script>
+  <script src="js/engine/runner.js"></script>
+  <script src="js/engine/minigames.js"></script>
+  <script src="js/engine/ui.js"></script>
+  <!-- ③ 功能模块：世界地图 -->
+  <script src="js/worldmap/worldmap.js"></script>
+  <script src="js/boss/boss.js"></script>
+  <script src="js/extras/itemcard.js"></script>
+  <script src="js/engine/main.js"></script>
+</body>
+</html>
