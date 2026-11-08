@@ -1,8 +1,17 @@
 # 断桥之森 · 山灵 —— 2.5D 点击式剧情游戏（v0.3，依据剧本 v0.2）
 
 纯 HTML/CSS/JS，无需安装、无需构建、无任何付费服务。
-**运行：解压后双击 `index.html`**（Chrome / Edge / Safari 均可）。
+**在线游玩：** https://lykbb.github.io/shanling-broken-bridge/
+**本地运行：** 解压后双击 `index.html`（Chrome / Edge / Safari 均可）。
 网址后加 `?debug=1` 打开调试模式（场景跳转、点击显示坐标、查看缺失素材）。
+
+页面、样式、脚本和素材都使用相对路径，适合用 GitHub Pages 的 main 分支 / 根目录发布到上述项目地址。根目录的 `.nojekyll` 用来跳过 Jekyll，让这些静态文件原样发布。
+
+## 许可
+
+源代码（`index.html`，以及 `css/`、`data/`、`js/`、`tools/` 中的 HTML / CSS / JavaScript）以 MIT 许可证发布。版权持有人是本仓库提交记录里的作者 **Lykboo**（GitHub 账号 **lykbb**）。许可全文见根目录 `LICENSE`。
+
+`assets/` 中的图片和美术不在 MIT 范围内，单独保留所有权利。本说明不对这些图片另行授权，也不代任何第三方声明所有权、来源或授权。仓库里没有写明的来源，这里也不补充。
 
 ---
 
@@ -118,7 +127,9 @@ my_node: [
 
 ## 六、部署到网页演示（免费）
 
-整个文件夹是纯静态网页，可直接拖到 Netlify Drop / GitHub Pages / Vercel 静态托管，得到一个可分享的网址。
+整个文件夹是纯静态网页。在线游玩地址：https://lykbb.github.io/shanling-broken-bridge/ （GitHub Pages，main 分支根目录）。本仓库只做静态发布准备，不包含启用 Pages 的工作流或其他托管配置。
+
+也可以把整个文件夹拖到 Netlify Drop，或其他只托管静态文件的服务。引用均为相对路径，放在项目子路径下即可打开。
 
 ## 世界地图模块（v0.5）
 
