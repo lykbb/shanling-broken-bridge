@@ -457,11 +457,11 @@ window.GAME_STORY = {
 /* 结局画面（剧情演完后显示） */
 window.GAME_ENDINGS = {
   true: {
-    title: '真结局 · 山醒', bgm: 'bgm_end_true', bg: 'bg_altar',
+    title: '结局一 · 山河归晴', bgm: 'bgm_end_true', bg: 'bg_altar',
     text: '裂隙合上了，祭坛上的金色山纹重新亮起。\n云溪村的钟声照常响起，老约翰在村口等到了一个风尘仆仆的年轻剑士。\n「山醒」——白莲与黑莲回到了山里，你回到了人间。'
   },
   fall: {
-    title: '结局 · 灵息尽散', bgm: 'bgm_end_fall', bg: 'bg_altar_corrupt', keepSave: true,
+    title: '结局二 · 山河永夜', bgm: 'bgm_end_fall', bg: 'bg_altar_corrupt', keepSave: true,
     text: '你没能拦住它。\n血雾漫过山岭，云溪村的灯一盏一盏熄灭了。\n（可以读档，回到祭坛重新挑战。）'
   }
 };

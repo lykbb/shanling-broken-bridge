@@ -46,15 +46,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const endTitle = d.querySelector('#ending-title').textContent;
   console.log('ending:', endTitle, '| loadsave btn:', d.querySelector('#btn-loadsave') && d.querySelector('#btn-loadsave').style.display);
   if (mode === 'win') {
-    ok(endTitle === '真结局 · 山醒', 'win → 真结局');
+    ok(endTitle === '结局一 · 山河归晴', 'win → 真结局');
     ok(G.state.has('twin') && !G.state.has('petal'), 'twin merged');
     ok(d.querySelector('#btn-loadsave').style.display === 'none', 'no 读档 on true ending');
   } else {
-    ok(endTitle === '结局 · 灵息尽散', mode + ' → 失败结局');
+    ok(endTitle === '结局二 · 山河永夜', mode + ' → 失败结局');
     ok(d.querySelector('#btn-loadsave').style.display !== 'none', '读档 button shown');
     ok(!!G.state.peek('auto'), 'checkpoint kept');
     d.querySelector('#btn-loadsave').click(); await sleep(800); await drain(100);
-    console.log('dbg', d.querySelector('#ending').className, G.state.data.scene, G.state.flag('boss_seen'));
     ok(!d.querySelector('#ending').classList.contains('show') && G.state.data.scene === 'altar' && G.state.flag('boss_seen'), 'load → back at altar');
     ok(!!d.querySelector('.hotspot') && [...d.querySelectorAll('.hotspot')].some((h) => /山灵/.test(h.textContent)), 'spirit hotspot available to retry');
     ok(Object.keys(w.GAME_ENDINGS).length === 2, '2 endings total');

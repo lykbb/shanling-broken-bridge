@@ -12,3 +12,13 @@
 #itemcard h4 { margin: 0 0 12px; font-size: 40px; color: #fff3d0; letter-spacing: 4px; }
 #itemcard p { margin: 0; font-size: 26px; line-height: 1.6; color: #e9dcc4; }
 #itemcard em { display: block; margin-top: 14px; font-size: 18px; font-style: normal; color: rgba(255,231,176,.5); }
+
+/* 过场 CG 视频 */
+#cutscene { position: absolute; inset: 0; z-index: 800; background: #000; opacity: 0; transition: opacity .5s; }
+#cutscene.show { opacity: 1; }
+#cutscene.out { opacity: 0; }
+#cutscene video { width: 100%; height: 100%; object-fit: cover; display: block; }
+#cutscene button { position: absolute; font: inherit; cursor: pointer; border-radius: 30px; }
+#cutscene .cs-skip { right: 48px; bottom: 44px; padding: 10px 28px; font-size: 26px; color: #fff3d0; background: rgba(0,0,0,.45); border: 1px solid rgba(255,220,150,.6); opacity: .75; transition: opacity .2s; }
+#cutscene .cs-skip:hover { opacity: 1; }
+#cutscene .cs-sound { left: 50%; top: 48px; transform: translateX(-50%); padding: 10px 28px; font-size: 24px; color: #2c1c08; background: rgba(240,207,134,.92); border: 0; display: none; }
