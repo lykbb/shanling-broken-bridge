@@ -1,0 +1,40 @@
+Copyright (c) 2026 Lykboo
+
+The copyright holder is Lykboo, the author name recorded in this
+repository. The GitHub account for this repository is lykbb. No other
+name is stated here.
+
+Scope
+-----
+
+The MIT License below applies only to the source code in this
+repository: index.html, and the HTML, CSS, and JavaScript in css/,
+data/, js/, and tools/. In the MIT License text, "the Software" means
+only that source code.
+
+Image and art files under assets/ are not source code and are not
+covered by the MIT License. All rights in those image and art files
+are reserved. This file does not license them. It does not say who
+owns them, and it does not state any third-party ownership, source, or
+permission.
+
+MIT License
+-----------
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
